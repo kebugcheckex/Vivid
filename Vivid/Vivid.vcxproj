@@ -101,6 +101,9 @@
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Gz.h" />
+    <ClInclude Include="GzDisplay.h" />
+    <ClInclude Include="GzRender.h" />
     <ClInclude Include="MainFrm.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="stdafx.h" />
@@ -110,6 +113,9 @@
     <ClInclude Include="VividView.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Gz.cpp" />
+    <ClCompile Include="GzDisplay.cpp" />
+    <ClCompile Include="GzRender.cpp" />
     <ClCompile Include="MainFrm.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>

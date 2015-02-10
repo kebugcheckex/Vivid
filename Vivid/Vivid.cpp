@@ -221,6 +221,3 @@ void CVividApp::SaveCustomState()
 }
 
 // CVividApp message handlers
-
-
-
