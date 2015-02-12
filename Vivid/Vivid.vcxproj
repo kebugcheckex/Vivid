@@ -101,7 +101,10 @@
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="GzDisplay.h" />
+    <ClInclude Include="GzDef.h" />
     <ClInclude Include="MainFrm.h" />
+    <ClInclude Include="GzRender.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
@@ -110,7 +113,9 @@
     <ClInclude Include="VividView.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="GzDisplay.cpp" />
     <ClCompile Include="MainFrm.cpp" />
+    <ClCompile Include="GzRender.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
@@ -128,11 +133,14 @@
     <ResourceCompile Include="Vivid.rc" />
   </ItemGroup>
   <ItemGroup>
+    <Image Include="E:\Downloads\teapot48.bmp" />
+    <Image Include="res\bitmap1.bmp" />
     <Image Include="res\buttons.bmp" />
     <Image Include="res\filelarge.bmp" />
     <Image Include="res\filesmall.bmp" />
     <Image Include="res\info.bmp" />
     <Image Include="res\main.bmp" />
+    <Image Include="res\renderlarge.bmp" />
     <Image Include="res\Toolbar.bmp" />
     <Image Include="res\Toolbar256.bmp" />
     <Image Include="res\Vivid.ico" />
@@ -143,4 +151,9 @@
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
+  <ProjectExtensions>
+    <VisualStudio>
+      <UserProperties RESOURCE_FILE="Vivid.rc" />
+    </VisualStudio>
+  </ProjectExtensions>
 </Project>

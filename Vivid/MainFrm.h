@@ -60,6 +60,8 @@ protected:
 	DECLARE_MESSAGE_MAP()
 
 	BOOL CreateCaptionBar();
+public:
+	afx_msg void OnRenderingRend();
 };
 
 
