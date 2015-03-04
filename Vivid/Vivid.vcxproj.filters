@@ -48,6 +48,9 @@
     <ClInclude Include="GzDisplay.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="GzColor.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Vivid.cpp">
@@ -69,6 +72,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="GzDisplay.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GzColor.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

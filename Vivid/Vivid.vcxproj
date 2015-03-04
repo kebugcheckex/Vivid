@@ -101,6 +101,7 @@
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="GzColor.h" />
     <ClInclude Include="GzDisplay.h" />
     <ClInclude Include="GzDef.h" />
     <ClInclude Include="MainFrm.h" />
@@ -113,6 +114,7 @@
     <ClInclude Include="VividView.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="GzColor.cpp" />
     <ClCompile Include="GzDisplay.cpp" />
     <ClCompile Include="MainFrm.cpp" />
     <ClCompile Include="GzRender.cpp" />

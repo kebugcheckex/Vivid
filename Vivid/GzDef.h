@@ -69,7 +69,7 @@ typedef int     GzRenderClass;
 typedef int     GzDisplayClass;
 typedef int     GzToken;
 typedef void    *GzPointer;
-typedef float   GzColor[3];
+//typedef float   GzColor[3];
 typedef short   GzIntensity;	/* 0 - 4095 in lower 12-bits */
 typedef float   GzCoord[3];
 typedef float	GzTextureIndex[2];

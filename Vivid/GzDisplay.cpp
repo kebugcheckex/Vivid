@@ -1,5 +1,5 @@
 #include "stdafx.h"
-#include "Display.h"
+#include "GzDisplay.h"
 
 
 GzDisplay::GzDisplay(GzDisplayClass dispClass, int xRes, int yRes)
