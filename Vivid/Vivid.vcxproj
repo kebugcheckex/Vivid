@@ -104,6 +104,8 @@
     <ClInclude Include="GzColor.h" />
     <ClInclude Include="GzDisplay.h" />
     <ClInclude Include="GzDef.h" />
+    <ClInclude Include="GzPoint.h" />
+    <ClInclude Include="GzVector.h" />
     <ClInclude Include="MainFrm.h" />
     <ClInclude Include="GzRender.h" />
     <ClInclude Include="Resource.h" />
@@ -116,6 +118,8 @@
   <ItemGroup>
     <ClCompile Include="GzColor.cpp" />
     <ClCompile Include="GzDisplay.cpp" />
+    <ClCompile Include="GzPoint.cpp" />
+    <ClCompile Include="GzVector.cpp" />
     <ClCompile Include="MainFrm.cpp" />
     <ClCompile Include="GzRender.cpp" />
     <ClCompile Include="stdafx.cpp">
