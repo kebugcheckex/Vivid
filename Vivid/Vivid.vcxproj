@@ -108,6 +108,7 @@
     <ClInclude Include="GzLight.h" />
     <ClInclude Include="GzLine.h" />
     <ClInclude Include="GzMatrix.h" />
+    <ClInclude Include="GzPixel.h" />
     <ClInclude Include="GzPlane.h" />
     <ClInclude Include="GzPoint.h" />
     <ClInclude Include="GzVector.h" />
@@ -127,6 +128,7 @@
     <ClCompile Include="GzLight.cpp" />
     <ClCompile Include="GzLine.cpp" />
     <ClCompile Include="GzMatrix.cpp" />
+    <ClCompile Include="GzPixel.cpp" />
     <ClCompile Include="GzPlane.cpp" />
     <ClCompile Include="GzPoint.cpp" />
     <ClCompile Include="GzVector.cpp" />

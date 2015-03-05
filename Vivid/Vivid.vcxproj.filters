@@ -72,6 +72,9 @@
     <ClInclude Include="GzMatrix.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="GzPixel.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Vivid.cpp">
@@ -117,6 +120,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="GzMatrix.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GzPixel.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

@@ -70,30 +70,14 @@ typedef int     GzDisplayClass;
 typedef int     GzToken;
 typedef void    *GzPointer;
 //typedef float   GzColor[3];
-typedef short   GzIntensity;	/* 0 - 4095 in lower 12-bits */
-typedef float   GzCoord[3];
+typedef unsigned short   GzIntensity;	/* 0 - 4095 in lower 12-bits */
+//typedef float   GzCoord[3];
 typedef float	GzTextureIndex[2];
 //typedef float	GzMatrix[4][4];
 typedef int		GzDepth;	/* z is signed for clipping */
 typedef	int(*GzTexture)();	/* pointer to texture sampling method */
 #endif
 
-/*
-* Gz camera definition - for making Xiw with rotations, scaling, translations.
-* Perspective projection is separate Xpi.
-*/
-#ifndef GZCAMERA
-#define GZCAMERA
-typedef struct  GzCamera1
-{
-	GzMatrix        Xiw;  		    /* xform from world to image space */
-	GzMatrix        Xpi;            /* perspective projection xform */
-	GzCoord         position;       /* position of image plane origin */
-	GzCoord         lookat;         /* position of look-at-point */
-	GzCoord         worldup;        /* world up-vector (almost screen up) */
-	float           FOV;            /* horizontal field of view */
-} GzCamera1;
-#endif
 
 /*
 * User input data definition
