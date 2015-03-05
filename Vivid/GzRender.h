@@ -1,5 +1,16 @@
+/*
+	File name:		GzRender.h
+	Description:	Definition of the GzRender class. This is the core class of the whole
+					project. 
+	Created by:		Xinyu Chen (collectchen@gmail.com)
+	Created on:		2015-03-01
+*/
 #pragma once
+#include "GzCamera.h"
+#include "GzColor.h"
 #include "GzDisplay.h"
+#include "GzLight.h"
+#include "GzMatrix.h"
 
 /* Camera defaults */
 #define	DEFAULT_FOV		35.0
@@ -15,14 +26,6 @@
 #define	MATLEVELS	100		/* how many matrix pushes allowed */
 #define	MAX_LIGHTS	10		/* how many lights allowed */
 
-/* Dummy definition : change it later */
-#ifndef GzLight
-#define GzLight		GzPointer
-#endif
-
-#ifndef GzTexture
-#define GzTexture	GzPointer
-#endif
 
 class GzRender
 {

@@ -73,7 +73,7 @@ typedef void    *GzPointer;
 typedef short   GzIntensity;	/* 0 - 4095 in lower 12-bits */
 typedef float   GzCoord[3];
 typedef float	GzTextureIndex[2];
-typedef float	GzMatrix[4][4];
+//typedef float	GzMatrix[4][4];
 typedef int		GzDepth;	/* z is signed for clipping */
 typedef	int(*GzTexture)();	/* pointer to texture sampling method */
 #endif
@@ -84,7 +84,7 @@ typedef	int(*GzTexture)();	/* pointer to texture sampling method */
 */
 #ifndef GZCAMERA
 #define GZCAMERA
-typedef struct  GzCamera
+typedef struct  GzCamera1
 {
 	GzMatrix        Xiw;  		    /* xform from world to image space */
 	GzMatrix        Xpi;            /* perspective projection xform */
@@ -92,7 +92,7 @@ typedef struct  GzCamera
 	GzCoord         lookat;         /* position of look-at-point */
 	GzCoord         worldup;        /* world up-vector (almost screen up) */
 	float           FOV;            /* horizontal field of view */
-} GzCamera;
+} GzCamera1;
 #endif
 
 /*

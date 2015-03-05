@@ -101,9 +101,14 @@
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="GzCamera.h" />
     <ClInclude Include="GzColor.h" />
     <ClInclude Include="GzDisplay.h" />
     <ClInclude Include="GzDef.h" />
+    <ClInclude Include="GzLight.h" />
+    <ClInclude Include="GzLine.h" />
+    <ClInclude Include="GzMatrix.h" />
+    <ClInclude Include="GzPlane.h" />
     <ClInclude Include="GzPoint.h" />
     <ClInclude Include="GzVector.h" />
     <ClInclude Include="MainFrm.h" />
@@ -116,8 +121,13 @@
     <ClInclude Include="VividView.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="GzCamera.cpp" />
     <ClCompile Include="GzColor.cpp" />
     <ClCompile Include="GzDisplay.cpp" />
+    <ClCompile Include="GzLight.cpp" />
+    <ClCompile Include="GzLine.cpp" />
+    <ClCompile Include="GzMatrix.cpp" />
+    <ClCompile Include="GzPlane.cpp" />
     <ClCompile Include="GzPoint.cpp" />
     <ClCompile Include="GzVector.cpp" />
     <ClCompile Include="MainFrm.cpp" />
