@@ -13,6 +13,6 @@ public:
 	/* Construct a plane by specifying its normal vector
 		and a point on the plane. */
 	GzPlane(const GzVector& normal, const GzPoint& pt);
-	~GzPlane();
+	
 };
 

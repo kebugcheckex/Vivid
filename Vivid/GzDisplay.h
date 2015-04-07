@@ -19,6 +19,7 @@ public:
 	bool Init();
 	bool PutPixel(int i, int j, GzPixel pixel);
 	GzPixel GetPixel(int i, int j);
+	
 	int FlushDisplay2File(std::string fileName);
 	int GzFlushDisplay2FrameBuffer(char *frameBuffer);
 	GzSize GetResolution();

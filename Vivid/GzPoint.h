@@ -13,7 +13,7 @@ public:
 	// Constructors
 	GzPoint();
 	GzPoint(float coords[]);
-	GzPoint(float _x, float _y, float _z);
+	GzPoint(float _x, float _y, float _z = 0);	/* Initialize with two or three coordinates*/
 	// Destrutor
 	~GzPoint();
 public:

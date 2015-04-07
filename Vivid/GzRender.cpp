@@ -101,8 +101,16 @@ bool GzRender::rasterize(GzTriangle& triangle)
 	{
 		for (int x = boundingbox.Left; x <= boundingbox.Right; x++)
 		{
-			// TODO - I am too sleepy to continue coding. See you tomorrow.
+			GzPoint point(x, y);
+			if (!triangle.CheckPointOnEdge(point) &&
+				!triangle.CheckPointInside(point))
+				continue;
+			float screenz = triangle.InterpolateZ(point);
+			GzPixel pixel = this->display_->GetPixel(x, y);
+			if (screenz < 0 || screenz > pixel.z) continue;
+			this->display_->PutPixel(x, y, pixel);
 		}
+		
 	}
 	return false;
 }

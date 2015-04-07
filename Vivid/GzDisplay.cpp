@@ -1,7 +1,6 @@
 #include "stdafx.h"
 #include "GzDisplay.h"
 
-
 GzDisplay::GzDisplay(GzDisplayClass dispClass, int xRes, int yRes)
 {
 	// Create a new display object, initialize its members
@@ -65,12 +64,10 @@ bool GzDisplay::Init()
 
 bool GzDisplay::PutPixel(int i, int j, GzPixel pixel)
 {
-	if (i < 0 || j < 0 || i >= m_xRes || j >= m_yRes)
-	{
-		AfxThrowInvalidArgException();
-		return GZ_FAILURE;
-	}
-
+	/*
+		TODO - At this point, pixel contains color values ranging
+		from 0 - 4095. We need to convert them to 0 - 255 range.
+	*/
 	if (pixel.red < 0)
 		pixel.red = 0;
 	else if (pixel.red > RGB_MAX_INTENSITY)
@@ -98,35 +95,23 @@ bool GzDisplay::PutPixel(int i, int j, GzPixel pixel)
 }
 
 
-bool GzDisplay::GetPixel(int i, int j, GzPixel& pixel)
+GzPixel GzDisplay::GetPixel(int i, int j)
 {
-	if (i < 0 || j < 0 || i >= m_xRes || j >= m_yRes)
-	{
-		AfxThrowInvalidArgException();
-		return GZ_FAILURE;
-	}
 	int idx = ARRAY(i, j);
-
+	GzPixel pixel;
 	pixel.red = m_pFrameBuffer[idx].red;
 	pixel.green = m_pFrameBuffer[idx].green;
 	pixel.blue = m_pFrameBuffer[idx].blue;
 	pixel.alpha = m_pFrameBuffer[idx].alpha;
 	pixel.z = m_pFrameBuffer[idx].z;
-	return GZ_SUCCESS;
+	return pixel;
 }
 
 
-int GzDisplay::FlushDisplay2File(FILE* outfile)
+int GzDisplay::FlushDisplay2File(std::string fileName)
 {
 	/* write pixels to ppm file based on display class -- "P6 %d %d 255\r" */
-
-	if (!outfile)
-	{
-		AfxThrowInvalidArgException();
-		return GZ_FAILURE;
-	}
-		
-
+	FILE *outfile = fopen(fileName.c_str, "w+");
 	char buffer[1024];
 
 	// create and write out header
@@ -198,5 +183,5 @@ int GzDisplay::GzFlushDisplay2FrameBuffer(char *frameBuffer)
 
 GzSize GzDisplay::GetResolution()
 {
-	return GzSize();
+	return GzSize(m_xRes, m_yRes);
 }

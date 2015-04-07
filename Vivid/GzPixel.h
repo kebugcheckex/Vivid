@@ -5,10 +5,9 @@ class GzPixel
 {
 public:
 	GzPixel();
-	~GzPixel();
 public:
 	GzIntensity red;
-	GzIntensity greed;
+	GzIntensity green;
 	GzIntensity blue;
 	GzIntensity alpha;
 	GzDepth z;
