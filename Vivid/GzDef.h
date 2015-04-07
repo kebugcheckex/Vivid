@@ -1,6 +1,4 @@
-/*
-* Gz.h - include file for the cs580 rendering library
-*/
+#include "stdafx.h"
 
 /*
 * universal constants
@@ -27,7 +25,7 @@
 #define GZ_TEXTURE_INDEX        3
 
 /* renderer-state color values for default (flat) shading */
-#define GZ_RGB_COLOR            99	/* we use RGB color space */
+//#define GZ_RGB_COLOR            99	/* we use RGB color space */
 
 
 #define GZ_SHADER			96	/* define the shade mode */
@@ -37,20 +35,20 @@
 */
 
 /* shade mode flags combine the bit fields below */
-#define	GZ_NONE			0	/* flat shading only */
-#define	GZ_AMBIENT			1	/* can be selected or not */
-#define	GZ_DIFFUSE			2	/* can be selected or not */
-#define 	GZ_SPECULAR			4	/* can be selected or not */
+//#define	GZ_NONE				0	/* flat shading only */
+//#define	GZ_AMBIENT			1	/* can be selected or not */
+//#define	GZ_DIFFUSE			2	/* can be selected or not */
+//#define GZ_SPECULAR			4	/* can be selected or not */
 
-#define GZ_DIRECTIONAL_LIGHT		79	/* directional light */
-#define GZ_AMBIENT_LIGHT		78	/* ambient light type */
+//#define GZ_DIRECTIONAL_LIGHT	79	/* directional light */
+//#define GZ_AMBIENT_LIGHT		78	/* ambient light type */
 
-#define GZ_AMBIENT_COEFFICIENT		1001	/* Ka material property */
-#define GZ_DIFFUSE_COEFFICIENT		1002	/* Kd material property */
-#define GZ_SPECULAR_COEFFICIENT		1003	/* Ks material property */
-#define GZ_DISTRIBUTION_COEFFICIENT	1004		/* specular power of material */
+//#define GZ_AMBIENT_COEFFICIENT		1001	/* Ka material property */
+//#define GZ_DIFFUSE_COEFFICIENT		1002	/* Kd material property */
+//#define GZ_SPECULAR_COEFFICIENT		1003	/* Ks material property */
+//#define GZ_DISTRIBUTION_COEFFICIENT	1004	/* specular power of material */
 
-#define	GZ_TEXTURE_MAP			1010	/* pointer to texture routine */
+//#define	GZ_TEXTURE_MAP			1010	/* pointer to texture routine */
 
 /* select interpolation mode of the shader (either one - not both) */
 #define	GZ_COLOR			1	/* interpolate vertex color */
@@ -67,7 +65,7 @@
 #define GZDATA
 typedef int     GzRenderClass;
 typedef int     GzDisplayClass;
-typedef int     GzToken;
+//typedef int     GzToken;
 typedef void    *GzPointer;
 //typedef float   GzColor[3];
 typedef unsigned short   GzIntensity;	/* 0 - 4095 in lower 12-bits */
@@ -98,11 +96,26 @@ typedef struct  GzInput
 #define GREEN   1
 #define BLUE    2
 
-#define X       0               /* array indicies for position vector */
-#define Y       1
-#define Z       2
-
 #define U       0               /* array indicies for texture coords */
 #define V       1
 
 #define RGB_MAX_INTENSITY 4095
+
+typedef enum tagGzToken
+{
+	GZ_RGB_COLOR,
+	GZ_INTERPOLATE,
+	GZ_AMBIENT_LIGHT,
+	GZ_DIRECTIONAL_LIGHT,
+	GZ_AMBIENT_COEFFICIENT,
+	GZ_DIFFUSE_COEFFICIENT,
+	GZ_SPECULAR_COEFFICIENT,
+	GZ_DISTRIBUTION_COEFFICIENT,
+	GZ_TEXTURE_MAP
+} GzToken;
+
+typedef struct tagGzTextureIndex
+{
+	float x;
+	float y;
+} GzTextureIndex;

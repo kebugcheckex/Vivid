@@ -4,14 +4,23 @@
 					project. 
 	Created by:		Xinyu Chen (collectchen@gmail.com)
 	Created on:		2015-03-01
+
+	Contributor:	Xinyu Chen
 */
 #pragma once
+#include "stdafx.h"
 #include "GzCamera.h"
 #include "GzColor.h"
 #include "GzDisplay.h"
 #include "GzLight.h"
 #include "GzMatrix.h"
+#include "GzRectangle.h"
+#include "GzTriangle.h"
 
+/*	TODO -
+	This class was converted from the C structure in the homework framework.
+	It needs to be rewrite in C++ style completely.
+*/
 /* Camera defaults */
 #define	DEFAULT_FOV		35.0
 #define	DEFAULT_IM_Z	(-10.0)  /* world coords for image plane origin */
@@ -23,29 +32,27 @@
 #define	DEFAULT_SPECULAR	{0.2, 0.3, 0.4}
 #define	DEFAULT_SPEC		32
 
-#define	MATLEVELS	100		/* how many matrix pushes allowed */
-#define	MAX_LIGHTS	10		/* how many lights allowed */
-
 
 class GzRender
 {
 public:
 	GzRender(GzRenderClass renderClass, GzDisplay *display);
 	~GzRender();
+	static const int MAX_LIGHTS = 10;
+	static const int MAX_MAT_LEVEL = 100;
 private:
 	GzRenderClass m_renderClass;
-	GzDisplay	m_pDisplay;
+	GzDisplay	*display_;
 	bool		   m_isOpen;
 	GzCamera		m_Camera;
 	short		    matlevel;	        /* top of stack - current xform */
-	GzMatrix		Ximage[MATLEVELS];	/* stack of xforms (Xsm) */
-	GzMatrix		Xnorm[MATLEVELS];	/* xforms for norms (Xim) */
+	GzMatrix		Ximage[MAX_MAT_LEVEL];	/* stack of xforms (Xsm) */
+	GzMatrix		Xnorm[MAX_MAT_LEVEL];	/* xforms for norms (Xim) */
 	GzMatrix		Xsp;		        /* NDC to screen (pers-to-screen) */
-	GzColor		flatcolor;          /* color state for flat shaded triangles */
-	int			interp_mode;
-	int			numlights;
-	GzLight		lights[MAX_LIGHTS];
-	GzLight		ambientlight;
+	GzColor		flatcolor_;				/* color state for flat shaded triangles */
+	int			interpmode_;
+	std::vector<GzLight> lights_;
+	GzLight		ambientlight_;
 	GzColor		Ka, Kd, Ks;
 	float		    spec;		/* specular power */
 	GzTexture		tex_fun;    /* tex_fun(float u, float v, GzColor color) */
@@ -56,5 +63,7 @@ public:
 	int PushMatrix(GzMatrix matrix);
 	int PutCamera(GzCamera camera);
 	int PopMatrix();
+private:
+	bool rasterize(GzTriangle& triangle);
 };
 

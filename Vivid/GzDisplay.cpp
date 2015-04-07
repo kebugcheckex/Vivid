@@ -194,3 +194,9 @@ int GzDisplay::GzFlushDisplay2FrameBuffer(char *frameBuffer)
 
 	return GZ_SUCCESS;
 }
+
+
+GzSize GzDisplay::GetResolution()
+{
+	return GzSize();
+}

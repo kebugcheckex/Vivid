@@ -4,6 +4,8 @@
 					line equation in two dimensional space
 	Created by:		Xinyu Chen (collectchen@gmail.com)
 	Created on:		2015-03-12
+
+	Contributors:	Xinyu Chen
 */
 
 #pragma once
@@ -28,6 +30,6 @@ private:
 
 /*
 	TODO -
-	This class needs to be abstracted into a virtual class.
+	This class can be abstracted into a virtual class.
 	And derives two subclasses for 2D and 3D space.
 */
