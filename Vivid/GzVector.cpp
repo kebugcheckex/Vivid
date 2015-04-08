@@ -19,8 +19,8 @@ GzVector::GzVector(float _x, float _y, float _z)
 {
 }
 
-GzVector::GzVector(float coords[3])
-	: GzPoint(coords)
+GzVector::GzVector(float coords, int dim)
+	: GzPoint(coords, dim)
 {
 }
 

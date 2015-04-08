@@ -17,14 +17,15 @@ public:
 	GzVector();
 	/* Initialize with x, y, z values. */
 	GzVector(float _x, float _y, float _z);
-	/* Initialize with an array of three float numbers. */
-	GzVector(float coords[3]);
+	/* Initialize with an array of float numbers. */
+	GzVector(float *coords, int dim);
 	/* Initialize with two coordinates. */
 	GzVector(const GzPoint& begin, const GzPoint& end);
 	// Destructor
 	~GzVector();
 public:
 	// Operators
+	float& operator [] (int index);
 	GzVector operator - ();	// Unary minus
 	GzVector operator = (const GzVector& rhs);	// Value copy
 	friend GzVector operator + (const GzVector& lhs, const GzVector& rhs);	// Vector addition
