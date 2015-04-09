@@ -16,6 +16,7 @@
 #include "GzMatrix.h"
 #include "GzRectangle.h"
 #include "GzTriangle.h"
+#include "GzVector.h"
 
 /*	TODO -
 	This class was converted from the C structure in the homework framework.
@@ -42,13 +43,13 @@ public:
 	static const int MAX_MAT_LEVEL = 100;
 private:
 	GzRenderClass m_renderClass;
-	GzDisplay	*display_;
+	GzDisplay	display_;
 	bool		   m_isOpen;
-	GzCamera		m_Camera;
+	GzCamera		camera_;
 	short		    matlevel;	        /* top of stack - current xform */
 	GzMatrix		Ximage[MAX_MAT_LEVEL];	/* stack of xforms (Xsm) */
 	GzMatrix		Xnorm[MAX_MAT_LEVEL];	/* xforms for norms (Xim) */
-	GzMatrix		Xsp;		        /* NDC to screen (pers-to-screen) */
+	GzMatrix		Xsp_;		        /* NDC to screen (pers-to-screen) */
 	GzColor		flatcolor_;				/* color state for flat shaded triangles */
 	int			interpmode_;
 	std::vector<GzLight> lights_;
@@ -65,5 +66,6 @@ public:
 	int PopMatrix();
 private:
 	bool rasterize(GzTriangle& triangle);
+	void buildMatrices();
 };
 

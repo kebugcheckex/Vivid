@@ -5,8 +5,9 @@
 using namespace std;
 
 GzRender::GzRender(GzRenderClass renderClass, GzDisplay *display)
+	: Xsp_(MATRIX_EYE)
 {
-	display_ = display;
+
 }
 
 
@@ -17,6 +18,10 @@ GzRender::~GzRender()
 
 int GzRender::BeginRender()
 {
+	// Build Xpi, Xiw, Xsp matrices
+	buildMatrices();
+	// Push those matrices into the stack
+
 	return 0;
 }
 
@@ -113,4 +118,57 @@ bool GzRender::rasterize(GzTriangle& triangle)
 		
 	}
 	return false;
+}
+
+
+void GzRender::buildMatrices()
+{
+	// First build the Xpi matrix
+	float fov = camera_.GetFov();
+	float d = 1 / tan(fov / 2);
+	GzMatrix Xpi(MATRIX_EYE);
+	Xpi.Set(3, 2, 1 / d);
+	camera_.SetXpiMatrix(Xpi);
+
+	// Then build the Xiw matrix
+	GzVector camZ = camera_.GetLookDirection();
+	camZ.Normalize();
+
+	GzVector world_up = camera_.GetWorldUp();
+	GzVector cam_up = world_up - (world_up * camZ) * camZ;
+	GzVector camY = cam_up;
+	GzVector camX = camY ^ camZ;
+	GzVector cam_pos = camera_.GetPosition();
+	
+	GzMatrix Xiw(MATRIX_EYE);
+	camX[3] = -(camX * cam_pos);
+	Xiw.SetRow(0, camX);
+	camY[3] = -(camY * cam_pos);
+	Xiw.SetRow(1, camY);
+	camZ[3] = -(camZ * cam_pos);
+	Xiw.SetRow(2, camZ);
+	camera_.SetXiwMatrix(Xiw);
+
+	// Finally build the Xsp matrix
+	//float fov = render->camera.FOV / 180 * PI;
+	//float d = 1 / tan(fov / 2);
+
+	//float x = render->display->xres / 2.0;
+	//float y = render->display->yres / 2.0;
+	//float z = INT_MAX / d;
+	//GzMatrix Xsp;
+	//Xsp[0][0] = x;	Xsp[0][1] = 0;	Xsp[0][2] = 0;	Xsp[0][3] = x;
+	//Xsp[1][0] = 0;	Xsp[1][1] = -y;	Xsp[1][2] = 0;	Xsp[1][3] = y;
+	//Xsp[2][0] = 0;	Xsp[2][1] = 0;	Xsp[2][2] = z;	Xsp[2][3] = 0;
+	//Xsp[3][0] = 0;	Xsp[3][1] = 0;	Xsp[3][2] = 0;	Xsp[3][3] = 1;
+
+	GzSize scr_res = display_.GetResolution();
+	float x = scr_res.X / 2.0;
+	float y = scr_res.Y / 2.0;
+	float z = INT_MAX / d;
+	Xsp_.Set(0, 0, x);
+	Xsp_.Set(0, 3, x);
+	Xsp_.Set(1, 1, y);
+	Xsp_.Set(1, 3, y);
+	Xsp_.Set(2, 2, 2);
 }

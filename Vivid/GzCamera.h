@@ -7,6 +7,7 @@
 */
 #pragma once
 #include "GzMatrix.h"
+#include "GzMatrix.h"
 #include "GzPoint.h"
 #include "GzVector.h"
 
@@ -14,7 +15,16 @@ class GzCamera
 {
 public:
 	GzCamera();
-	~GzCamera();
+	float GetFov();
+	GzVector GetWorldUp();
+	/* Returns the vector from camera position to look-at position */
+	GzVector GetLookDirection();
+
+	/* Return the camera position vector */
+	GzVector GetPosition();
+	void MoveTo(GzPoint position);
+	void SetXpiMatrix(const GzMatrix& xpi);
+	void SetXiwMatrix(const GzMatrix& xiw);
 private:
 	/* Horizontal field of view. */
 	float m_fov;
