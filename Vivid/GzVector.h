@@ -26,7 +26,7 @@ public:
 	GzVector(const GzPoint& begin, const GzPoint& end);
 
 	// Subscript operator, supports both read and write
-	float& operator [] (const int index);
+	float& operator [] (int index);
 
 	// Unary minus
 	void operator - ();

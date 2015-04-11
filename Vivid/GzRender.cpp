@@ -1,3 +1,9 @@
+/*	TODO
+	This is the core render class. I suggest implement this at last
+*/
+
+
+
 #include "stdafx.h"
 #include "GzLine.h"
 #include "GzRender.h"
@@ -77,9 +83,9 @@ int GzRender::PutTriangle(int numParts, GzToken * nameList, GzPointer * valueLis
 }
 
 
-int GzRender::PushMatrix(GzMatrix matrix)
+void GzRender::PushMatrix(GzMatrix matrix)
 {
-	return 0;
+	
 }
 
 
@@ -89,9 +95,13 @@ int GzRender::PutCamera(GzCamera camera)
 }
 
 
-int GzRender::PopMatrix()
+void GzRender::PopMatrix()
 {
-	return 0;
+	if (Ximage_.size() > 0)
+	{
+		Ximage_.pop();
+		Xnorm_.pop();
+	}
 }
 
 

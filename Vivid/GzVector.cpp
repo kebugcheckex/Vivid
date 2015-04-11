@@ -46,7 +46,7 @@ float GzVector::GetMagnitude()
 	return sqrt(X*X + Y*Y + Z*Z);
 }
 
-float& GzVector::operator [] (const int index)
+float& GzVector::operator [] (int index)
 {
 	switch (index)
 	{

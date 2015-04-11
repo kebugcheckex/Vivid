@@ -47,8 +47,8 @@ private:
 	bool		   m_isOpen;
 	GzCamera		camera_;
 	short		    matlevel;	        /* top of stack - current xform */
-	GzMatrix		Ximage[MAX_MAT_LEVEL];	/* stack of xforms (Xsm) */
-	GzMatrix		Xnorm[MAX_MAT_LEVEL];	/* xforms for norms (Xim) */
+	std::stack<GzMatrix> Ximage_;		/* stack of xforms (Xsm) */
+	std::stack<GzMatrix> Xnorm_;	/* xforms for norms (Xim) */
 	GzMatrix		Xsp_;		        /* NDC to screen (pers-to-screen) */
 	GzColor		flatcolor_;				/* color state for flat shaded triangles */
 	int			interpmode_;
@@ -63,7 +63,7 @@ public:
 	int PutTriangle(int numParts, GzToken * nameList, GzPointer * valueList);
 	int PushMatrix(GzMatrix matrix);
 	int PutCamera(GzCamera camera);
-	int PopMatrix();
+	void PopMatrix();
 private:
 	bool rasterize(GzTriangle& triangle);
 	void buildMatrices();
