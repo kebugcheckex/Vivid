@@ -18,10 +18,8 @@
 #include "GzTriangle.h"
 #include "GzVector.h"
 
-/*	TODO -
-	This class was converted from the C structure in the homework framework.
-	It needs to be rewrite in C++ style completely.
-*/
+enum RenderClass { Z_BUFFER_RENDER };
+
 /* Camera defaults */
 #define	DEFAULT_FOV		35.0
 #define	DEFAULT_IM_Z	(-10.0)  /* world coords for image plane origin */
@@ -37,16 +35,16 @@
 class GzRender
 {
 public:
-	GzRender(GzRenderClass renderClass, GzDisplay *display);
+	GzRender(RenderClass renderClass, GzDisplay *display);
 	~GzRender();
 	static const int MAX_LIGHTS = 10;
 	static const int MAX_MAT_LEVEL = 100;
 private:
-	GzRenderClass m_renderClass;
-	GzDisplay	display_;
-	bool		   m_isOpen;
-	GzCamera		camera_;
-	short		    matlevel;	        /* top of stack - current xform */
+	RenderClass render_class_;
+	GzDisplay	*display_;
+	bool		open_;
+	GzCamera	camera_;
+	//short		   matlevel;	        /* top of stack - current xform */
 	std::stack<GzMatrix> Ximage_;		/* stack of xforms (Xsm) */
 	std::stack<GzMatrix> Xnorm_;	/* xforms for norms (Xim) */
 	GzMatrix		Xsp_;		        /* NDC to screen (pers-to-screen) */
@@ -55,13 +53,15 @@ private:
 	std::vector<GzLight> lights_;
 	GzLight		ambientlight_;
 	GzColor		Ka, Kd, Ks;
-	float		    spec;		/* specular power */
+	float		    spec_;		/* specular power */
 	GzTexture		tex_fun;    /* tex_fun(float u, float v, GzColor color) */
+	float aa_shiftx_;
+	float aa_shifty_;
 public:
 	int BeginRender();
 	int PutAttribute(int numAtrributes, GzToken * nameList, GzPointer * valueList);
 	int PutTriangle(int numParts, GzToken * nameList, GzPointer * valueList);
-	int PushMatrix(GzMatrix matrix);
+	void PushMatrix(GzMatrix matrix);
 	int PutCamera(GzCamera camera);
 	void PopMatrix();
 private:

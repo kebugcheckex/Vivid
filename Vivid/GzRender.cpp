@@ -10,10 +10,20 @@
 
 using namespace std;
 
-GzRender::GzRender(GzRenderClass renderClass, GzDisplay *display)
-	: Xsp_(MATRIX_EYE)
+GzRender::GzRender(RenderClass render_class, GzDisplay *display)
+	: Xsp_(MATRIX_EYE), open_(false)
 {
-
+	// Currently the only supported render is Z buffer render, so the following
+	// line is kind of useless
+	if (render_class = Z_BUFFER_RENDER) render_class = render_class_;
+	display_ = display;
+	camera_.MoveTo(GzPoint(-10.0, 5.0, -10.0));	// Default camera location
+	camera_.LookAt(GzPoint(0.0, 0.0, 0.0));		// Default look at position
+	camera_.SetWorldUpDirection(GzVector(0.0, 1.0, 0.0));	// Default world up
+	camera_.SetFov(35.0);
+	ambientlight_.SetColor(GzColor(1.0, 0.5, 1.0));
+	spec_ = 32;	// Default specular power
+	aa_shiftx_ = aa_shifty_ = 0.0;
 }
 
 
@@ -85,12 +95,17 @@ int GzRender::PutTriangle(int numParts, GzToken * nameList, GzPointer * valueLis
 
 void GzRender::PushMatrix(GzMatrix matrix)
 {
-	
+	if (Ximage_.size() == 0)
+		Ximage_.push(matrix);
+	else
+		Ximage_.push(Ximage_.top() * matrix);
+
 }
 
 
 int GzRender::PutCamera(GzCamera camera)
 {
+	camera_ = camera;
 	return 0;
 }
 
