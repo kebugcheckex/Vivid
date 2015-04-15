@@ -1,11 +1,11 @@
 /*
-	File name:		GzCamera.h
-	Description:	Definition of the GzCamera class. This class implements
-					the camera data structure.
-	Created by:		Xinyu Chen (collectchen@gmail.com)
-	Created on:		2015-03-05
+File name:		GzCamera.h
+Description:	Definition of the GzCamera class. This class implements
+the camera data structure.
+Created by:		Xinyu Chen (collectchen@gmail.com)
+Created on:		2015-03-05
 
-	Contributors:	Xinyu Chen
+Contributors:	Xinyu Chen
 */
 #pragma once
 #include "GzMatrix.h"
@@ -55,4 +55,3 @@ private:
 	/* Transform matrix for perspective projection */
 	GzMatrix m_Xpi;
 };
-
