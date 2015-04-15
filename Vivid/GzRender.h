@@ -58,6 +58,7 @@ public:
 	void PushMatrix(GzMatrix matrix);
 	int PutCamera(GzCamera camera);
 	void PopMatrix();
+	bool IsOpen();
 private:
 	bool rasterize(GzTriangle& triangle);
 	void buildMatrices();

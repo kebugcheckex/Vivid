@@ -1,5 +1,7 @@
 #pragma once
+#include "GzDef.h"
 #include "GzEdge.h"
+#include "GzLine.h"
 #include "GzPoint.h"
 #include "GzRectangle.h"
 class GzTriangle
@@ -13,12 +15,16 @@ public:
 	bool CheckPointInside(const GzPoint& point);
 	bool CheckPointOnEdge(const GzPoint& point);
 	float InterpolateZ(const GzPoint& point);
+	void GetSortedEdges(GzEdge *edges);
+	float GetXmax();
+	float GetXmin();
+	float GetYmax();
+	float GetYmin();
 private:
 	GzPoint p_, q_;				/* Screen space vertices, 2D */
 	GzPoint a_, b_, c_;			/* Model space vertices, 3D */
 	GzVector na_, nb_, nc_;		/* Model space normals, 3D */
 	GzTextureIndex texture_;	/* Texture Index */
-	GzEdge ea_, eb_, ec;		/* Edges */
-	GzEdge sea_, seb_, sec_;	/* Sorted edges */
+	GzEdge ea_, eb_, ec_;		/* Edges */
 };
 

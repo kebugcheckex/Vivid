@@ -38,6 +38,7 @@ BEGIN_MESSAGE_MAP(CVividView, CView)
 	ON_COMMAND(ID_FILE_PRINT_PREVIEW, &CVividView::OnFilePrintPreview)
 	ON_WM_CONTEXTMENU()
 	ON_WM_RBUTTONUP()
+	ON_COMMAND(ID_RENDERING_REND, &CVividView::OnRenderingRend)
 END_MESSAGE_MAP()
 
 // CVividView construction/destruction
@@ -62,14 +63,14 @@ BOOL CVividView::PreCreateWindow(CREATESTRUCT& cs)
 
 // CVividView drawing
 
-void CVividView::OnDraw(CDC* /*pDC*/)
+void CVividView::OnDraw(CDC* pDC)
 {
 	CVividDoc* pDoc = GetDocument();
 	ASSERT_VALID(pDoc);
 	if (!pDoc)
 		return;
 
-	// TODO: add draw code for native data here
+	if (m_pApp != NULL) DrawFrameBuffer(pDC);
 }
 
 
@@ -135,3 +136,75 @@ CVividDoc* CVividView::GetDocument() const // non-debug version is inline
 
 
 // CVividView message handlers
+
+void CVividView::OnRenderingRend()
+{
+	if (m_pApp != NULL)
+		m_pApp->Render();
+	else
+		return;
+
+	CRect clientRect, windowRect;
+	int x_offset, y_offset;
+
+	GetClientRect(&clientRect);
+	AfxGetMainWnd()->GetWindowRect(&windowRect);
+
+	x_offset = windowRect.Width() - clientRect.Width();
+	y_offset = windowRect.Height() - clientRect.Height();
+
+	AfxGetMainWnd()->SetWindowPos(NULL, 100, 100, x_offset + m_pApp->Width, y_offset + m_pApp->Height, NULL);
+
+	Invalidate(true);
+}
+
+void CVividView::DrawFrameBuffer(CDC *pDC)
+{
+	if (m_pApp->FrameBuffer == NULL)
+	{
+		return;
+	}
+
+	if (!m_pApp->render_->IsOpen())
+	{
+		AfxMessageBox(L"Renderer was not opened\n");
+		return;
+	}
+
+	HDC hdc;
+	hdc = ::CreateCompatibleDC(pDC->m_hDC);
+	HBITMAP m_bitmap;
+
+	// Display the current image
+	char buffer[sizeof(BITMAPINFO)];
+	BITMAPINFO* binfo = (BITMAPINFO*)buffer;
+	memset(binfo, 0, sizeof(BITMAPINFOHEADER));
+	binfo->bmiHeader.biSize = sizeof(BITMAPINFOHEADER);
+
+	// Create the bitmap
+	BITMAPINFOHEADER* bih = &binfo->bmiHeader;
+	bih->biBitCount = 3 * 8;
+	bih->biWidth = m_pApp->Width;
+	bih->biHeight = m_pApp->Height;
+	bih->biPlanes = 1;
+	bih->biCompression = BI_RGB;
+	bih->biSizeImage = 0;
+
+	m_bitmap = CreateDIBSection(hdc, binfo, 0, 0, 0, DIB_RGB_COLORS);
+
+	int colors = DIB_RGB_COLORS;
+
+	::SelectObject(hdc, m_bitmap);
+	binfo->bmiHeader.biBitCount = 0;
+	GetDIBits(hdc, m_bitmap, 0, 0, 0, binfo, colors);
+	binfo->bmiHeader.biBitCount = 24;
+	binfo->bmiHeader.biHeight = -abs(binfo->bmiHeader.biHeight);
+	SetDIBits(hdc, m_bitmap, 0, m_pApp->Height, m_pApp->FrameBuffer, binfo, colors);
+
+	::SetStretchBltMode(pDC->m_hDC, COLORONCOLOR);
+	CRect client;
+	GetClientRect(&client);
+	::BitBlt(pDC->m_hDC, 0, 0, m_pApp->Width, m_pApp->Height, hdc, 0, 0, SRCCOPY);
+	::DeleteDC(hdc);
+	DeleteObject(m_bitmap);
+}

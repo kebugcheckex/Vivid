@@ -114,7 +114,6 @@
     <ClInclude Include="GzPlane.h" />
     <ClInclude Include="GzPoint.h" />
     <ClInclude Include="GzRectangle.h" />
-    <ClInclude Include="GzScreenColor.h" />
     <ClInclude Include="GzSize.h" />
     <ClInclude Include="GzTriangle.h" />
     <ClInclude Include="GzVector.h" />
@@ -140,7 +139,6 @@
     <ClCompile Include="GzPlane.cpp" />
     <ClCompile Include="GzPoint.cpp" />
     <ClCompile Include="GzRectangle.cpp" />
-    <ClCompile Include="GzScreenColor.cpp" />
     <ClCompile Include="GzSize.cpp" />
     <ClCompile Include="GzTriangle.cpp" />
     <ClCompile Include="GzVector.cpp" />

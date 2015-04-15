@@ -114,3 +114,40 @@ GzMatrix operator * (const GzMatrix& lhs, const GzMatrix& rhs)
 	}
 	return res;
 }
+
+GzMatrix operator * (const GzMatrix& lhs, const float rhs)
+{
+	GzMatrix res;
+	for (int j = 0; j < 4; j++)
+	{
+		for (int i = 0; i < 4; i++)
+		{
+			res.elements_[i][j] = lhs.elements_[i][j] * rhs;
+		}
+	}
+	return res;
+}
+
+GzMatrix GzMatrix::operator *= (const float rhs)
+{
+	for (int j = 0; j < 4; j++)
+	{
+		for (int i = 0; i < 4; i++)
+		{
+			elements_[i][j] *= rhs;
+		}
+	}
+}
+
+GzMatrix operator * (const float lhs, const GzMatrix& rhs)
+{
+	GzMatrix res;
+	for (int j = 0; j < 4; j++)
+	{
+		for (int i = 0; i < 4; i++)
+		{
+			res.elements_[i][j] = rhs.elements_[i][j] * lhs;
+		}
+	}
+	return res;
+}

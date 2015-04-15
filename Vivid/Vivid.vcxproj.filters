@@ -87,9 +87,6 @@
     <ClInclude Include="GzSize.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="GzScreenColor.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Application.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -153,9 +150,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="GzSize.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="GzScreenColor.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Application.cpp">

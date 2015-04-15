@@ -15,7 +15,6 @@ public:
 	GzColor();
 	/* Construct a color specifying the red, green, blue, alpha channel. */
 	GzColor(float r, float g, float b, float a = 1.0);
-	~GzColor();
 public:
 	// Public member variables
 	float Red;

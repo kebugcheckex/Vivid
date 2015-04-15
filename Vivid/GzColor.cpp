@@ -11,7 +11,3 @@ GzColor::GzColor(float r, float g, float b, float a)
 	: Red(r), Green(g), Blue(b), Alpha(a)
 {
 }
-
-GzColor::~GzColor()
-{
-}

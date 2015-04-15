@@ -3,12 +3,18 @@
 
 
 GzRectangle::GzRectangle()
-	: left(0.0), top(0.0), right(0.0), bottom(0.0)
-{
-}
+	: Left(0.0), Top(0.0), Right(0.0), Bottom(0.0)
+{}
 
 
 GzRectangle::GzRectangle(float l, float t, float r, float b)
-	: left(l), top(t), right(r), bottom(b)
+	: Left(l), Top(t), Right(r), Bottom(b)
+{}
+
+GzRectangle::GzRectangle(GzPoint& topleft, GzPoint& bottomright)
 {
+	Left = topleft.X;
+	Top = topleft.Y;
+	Right = bottomright.X;
+	Bottom = bottomright.Y;
 }

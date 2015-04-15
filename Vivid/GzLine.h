@@ -18,7 +18,6 @@ public:
 	GzLine(const GzPoint& pa, const GzPoint& pb);
 	/* Construct a line with a vector and a point */
 	GzLine(const GzVector& v, const GzPoint& p);
-	~GzLine();
 public:
 	/* Check whether a point is on this line */
 	bool IsOnTheLine(const GzPoint& p);
@@ -27,9 +26,3 @@ public:
 private:
 	float A, B, C; // Line equation coefficients
 };
-
-/*
-	TODO -
-	This class can be abstracted into a virtual class.
-	And derives two subclasses for 2D and 3D space.
-*/

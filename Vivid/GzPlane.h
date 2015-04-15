@@ -13,6 +13,10 @@ public:
 	/* Construct a plane by specifying its normal vector
 		and a point on the plane. */
 	GzPlane(const GzVector& normal, const GzPoint& pt);
-	
+
+	/* Compute the interpolated Z value */
+	float GetInterpolatedZ(float x, float y);
+private:
+	float A, B, C, D;
 };
 

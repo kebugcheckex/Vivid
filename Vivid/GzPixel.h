@@ -4,8 +4,6 @@
 class GzPixel
 {
 public:
-	GzPixel();
-public:
 	GzIntensity red;
 	GzIntensity green;
 	GzIntensity blue;

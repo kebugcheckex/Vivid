@@ -7,11 +7,6 @@ GzLine::GzLine()
 	A = B = C = 0;
 }
 
-
-GzLine::~GzLine()
-{
-}
-
 /*	Construct a line with two points
 	Line equation: Ax + By + C = 0
 	Two points (x_1, y_1) and (x_2, y_2)
@@ -24,9 +19,9 @@ GzLine::~GzLine()
 */
 GzLine::GzLine(const GzPoint& pa, const GzPoint& pb)
 {
-	A = pb.y - pa.y;
-	B = -(pb.x - pa.x);
-	C = -(A * pa.x + B * pa.y);
+	A = pb.Y - pa.Y;
+	B = -(pb.X - pa.X);
+	C = -(A * pa.X + B * pa.Y);
 }
 
 /*	Construct a line with a vector and a point
@@ -41,9 +36,9 @@ GzLine::GzLine(const GzPoint& pa, const GzPoint& pb)
 */
 GzLine::GzLine(const GzVector& v, const GzPoint& p)
 {
-	A = v.y;
-	B = -v.x;
-	C = -(A * p.x + B * p.y);
+	A = v.Y;
+	B = -v.X;
+	C = -(A * p.X + B * p.Y);
 }
 
 /*	Check whether a point is on this line
@@ -62,7 +57,7 @@ bool GzLine::IsOnTheLine(const GzPoint& p)
 */
 int GzLine::WhichSide(const GzPoint& p)
 {
-	float val = A * p.x + B * p.y + C;
+	float val = A * p.X + B * p.Y + C;
 	if (val == 0.0) return 0;	// TODO - Possible float point accuracy problem
 	return val > 0.0 ? 1 : -1;
 }

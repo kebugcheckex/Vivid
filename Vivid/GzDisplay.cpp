@@ -1,16 +1,16 @@
 #include "stdafx.h"
 #include "GzDisplay.h"
 
-GzDisplay::GzDisplay(GzDisplayClass dispClass, int xRes, int yRes)
+GzDisplay::GzDisplay(DisplayClass dispClass, int xRes, int yRes)
 {
 	// Create a new display object, initialize its members
-	if (xRes < 0 || yRes < 0 || xRes > MAXXRES || yRes > MAXYRES)
+	if (xRes < 0 || yRes < 0 || xRes > MAX_XRES || yRes > MAX_YRES)
 	{
 		AfxThrowInvalidArgException();
 	}
 	m_xRes = xRes;
 	m_yRes = yRes;
-	m_isOpen = true;
+	open_ = true;
 	m_dispClass = dispClass;
 	m_pFrameBuffer = new GzPixel[xRes * yRes];
 }
@@ -26,7 +26,7 @@ GzDisplay::~GzDisplay()
 }
 
 
-bool GzDisplay::GetParam(int *xRes, int *yRes, GzDisplayClass *dispClass)
+bool GzDisplay::GetParam(int *xRes, int *yRes, DisplayClass *dispClass)
 {
 	if (!xRes || !yRes || !dispClass)
 	{
@@ -179,7 +179,6 @@ int GzDisplay::GzFlushDisplay2FrameBuffer(char *frameBuffer)
 
 	return GZ_SUCCESS;
 }
-
 
 GzSize GzDisplay::GetResolution()
 {

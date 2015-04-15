@@ -3,6 +3,7 @@
 class GzEdge
 {
 public:
+	GzEdge();
 	GzEdge(GzPoint& begin, GzPoint& end);
 	bool Colored;
 private:

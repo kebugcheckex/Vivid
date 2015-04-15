@@ -54,9 +54,9 @@ void GzLight::SetDirection(GzVector& direction)
 
 void GzLight::SetDirection(float x, float y, float z)
 {
-	direction_.x = x;
-	direction_.y = y;
-	direction_.z = z;
+	direction_.X = x;
+	direction_.Y = y;
+	direction_.Z = z;
 }
 
 void GzLight::TurnOff()
