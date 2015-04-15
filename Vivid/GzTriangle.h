@@ -5,8 +5,8 @@
 class GzTriangle
 {
 public:
-	GzTriangle(GzPoint& p, GzPoint& q, GzPoint& a, GzPoint& b, GzPoint& c,
-		GzVector& na, GzVector& nb, GzVector& nc, GzTextureIndex& texture);
+	GzTriangle(GzVector *screenVerts, GzVector *modelVerts, GzVector *modelNormals,
+		GzTextureIndex& texture);
 	GzRectangle GetScreenBoundingBox(const GzRectangle& screenboundary);
 	void GetLines(std::vector<GzLine>& lines);
 	GzVector GetNormal();		/* Get triangle plane normal */

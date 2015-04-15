@@ -11,18 +11,7 @@
 */
 #define GZ_RGBAZ_DISPLAY        1
 
-/*
-* rendering classes
-*/
-#define GZ_Z_BUFFER_RENDER      1
 
-/*
-* name list tokens
-*/
-#define GZ_NULL_TOKEN           0	/* triangle vert attributes */
-#define GZ_POSITION             1
-#define GZ_NORMAL               2
-#define GZ_TEXTURE_INDEX        3
 
 /* renderer-state color values for default (flat) shading */
 //#define GZ_RGB_COLOR            99	/* we use RGB color space */
@@ -63,14 +52,10 @@
 
 #ifndef GZDATA
 #define GZDATA
-typedef int     GzRenderClass;
 typedef int     GzDisplayClass;
-//typedef int     GzToken;
 typedef void    *GzPointer;
 //typedef float   GzColor[3];
 typedef unsigned short   GzIntensity;	/* 0 - 4095 in lower 12-bits */
-//typedef float   GzCoord[3];
-typedef float	GzTextureIndex[2];
 //typedef float	GzMatrix[4][4];
 typedef int		GzDepth;	/* z is signed for clipping */
 typedef	int(*GzTexture)();	/* pointer to texture sampling method */
@@ -111,7 +96,11 @@ typedef enum tagGzToken
 	GZ_DIFFUSE_COEFFICIENT,
 	GZ_SPECULAR_COEFFICIENT,
 	GZ_DISTRIBUTION_COEFFICIENT,
-	GZ_TEXTURE_MAP
+	GZ_TEXTURE_MAP,
+	GZ_NULL_TOKEN,
+	GZ_POSITION,
+	GZ_NORMAL,
+	GZ_TEXTURE_INDEX
 } GzToken;
 
 typedef struct tagGzTextureIndex

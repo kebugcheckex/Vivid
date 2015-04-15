@@ -20,12 +20,6 @@
 
 enum RenderClass { Z_BUFFER_RENDER };
 
-/* Camera defaults */
-#define	DEFAULT_FOV		35.0
-#define	DEFAULT_IM_Z	(-10.0)  /* world coords for image plane origin */
-#define	DEFAULT_IM_Y	(5.0)    /* default look-at point = 0,0,0 */
-#define	DEFAULT_IM_X	(-10.0)
-
 #define	DEFAULT_AMBIENT	{0.1, 0.1, 0.1}
 #define	DEFAULT_DIFFUSE	{0.7, 0.6, 0.5}
 #define	DEFAULT_SPECULAR	{0.2, 0.3, 0.4}
@@ -60,12 +54,15 @@ private:
 public:
 	int BeginRender();
 	int PutAttribute(int numAtrributes, GzToken * nameList, GzPointer * valueList);
-	int PutTriangle(int numParts, GzToken * nameList, GzPointer * valueList);
+	int PutTriangle(int num, GzToken *names, GzPointer *values);
 	void PushMatrix(GzMatrix matrix);
 	int PutCamera(GzCamera camera);
 	void PopMatrix();
 private:
 	bool rasterize(GzTriangle& triangle);
 	void buildMatrices();
+
+	/* Check whether the triangle is inside the display area */
+	bool isTriangleInScreen(GzVector *verts);
 };
 

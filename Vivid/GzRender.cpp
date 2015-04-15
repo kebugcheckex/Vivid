@@ -78,8 +78,25 @@ int GzRender::PutAttribute(int num, GzToken *tokens, GzPointer *values)
 			break;
 		}
 		case GZ_AMBIENT_COEFFICIENT:
-			// TODO - I went to shower at this point.
+		{
+			GzColor *color = static_cast<GzColor*>(values[i]);
+			Ka = *color;
+			break;
+		}
+		case GZ_DIFFUSE_COEFFICIENT:
+		{
+			GzColor *color = static_cast<GzColor*>(values[i]);
+			Kd = *color;
+			break;
+		}
+		case GZ_SPECULAR_COEFFICIENT:
+		{
+			GzColor *color = static_cast<GzColor*>(values[i]);
+			Ks = *color;
+			break;
+		}
 		default:
+			// Throw some exceptions
 			break;
 		}
 	}
@@ -87,8 +104,62 @@ int GzRender::PutAttribute(int num, GzToken *tokens, GzPointer *values)
 }
 
 
-int GzRender::PutTriangle(int numParts, GzToken * nameList, GzPointer * valueList)
+int GzRender::PutTriangle(int num, GzToken *names, GzPointer *values)
 {
+	GzVector *modelVerts = nullptr;
+	GzVector *modelNormals = nullptr;
+	GzVector screenVerts[3];
+	GzVector cameraVerts[3];
+	GzVector cameraNormals[3];
+	GzTextureIndex textureIndex;
+	for (int i = 0; i < num; i++)
+	{
+		switch (names[i])
+		{
+		case GZ_NULL_TOKEN:
+			break;
+		case GZ_POSITION:
+		{	/*	When we get three vertices of a triangle, they are in model space.
+				First thing we need to do is to transform it to the screen space using
+				the top matrix in the matrices stack. And then check whether it is
+				behind the screen, or whether it is inside the screen.
+			*/
+			modelVerts = static_cast<GzVector*>(values[i]);
+			bool behind_camera = false;
+			for (int j = 0; j < 3; j++)
+			{
+				GzMatrix T = Ximage_.top();
+				screenVerts[j] = T * modelVerts[j];
+				if (screenVerts[j][2] < 0)
+				{
+					behind_camera = true;
+					break;
+				}
+			}
+			if (behind_camera) continue;
+			if (!isTriangleInScreen(screenVerts)) continue;
+			break;
+		}
+		case GZ_NORMAL:
+			modelNormals = static_cast<GzVector*>(values[i]);
+			break;
+		case GZ_TEXTURE_INDEX:
+		{
+			float *ind = static_cast<float*>(values[i]);
+			textureIndex.x = ind[0]; textureIndex.y = ind[1];
+			break;
+		}
+		default:
+			break;
+		}
+	}
+	for (int i = 0; i < 3; i++)
+	{
+		cameraVerts[i] = Ximage_.top() * modelVerts[i];
+		cameraNormals[i] = Xnorm_.top() * modelNormals[i];
+	}
+	GzTriangle triangle(screenVerts, modelVerts, modelNormals, textureIndex);
+	rasterize(triangle);
 	return 0;
 }
 
@@ -175,19 +246,7 @@ void GzRender::buildMatrices()
 	camera_.SetXiwMatrix(Xiw);
 
 	// Finally build the Xsp matrix
-	//float fov = render->camera.FOV / 180 * PI;
-	//float d = 1 / tan(fov / 2);
-
-	//float x = render->display->xres / 2.0;
-	//float y = render->display->yres / 2.0;
-	//float z = INT_MAX / d;
-	//GzMatrix Xsp;
-	//Xsp[0][0] = x;	Xsp[0][1] = 0;	Xsp[0][2] = 0;	Xsp[0][3] = x;
-	//Xsp[1][0] = 0;	Xsp[1][1] = -y;	Xsp[1][2] = 0;	Xsp[1][3] = y;
-	//Xsp[2][0] = 0;	Xsp[2][1] = 0;	Xsp[2][2] = z;	Xsp[2][3] = 0;
-	//Xsp[3][0] = 0;	Xsp[3][1] = 0;	Xsp[3][2] = 0;	Xsp[3][3] = 1;
-
-	GzSize scr_res = display_.GetResolution();
+	GzSize scr_res = display_->GetResolution();
 	float x = scr_res.X / 2.0;
 	float y = scr_res.Y / 2.0;
 	float z = INT_MAX / d;

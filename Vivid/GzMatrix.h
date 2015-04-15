@@ -15,14 +15,24 @@ typedef enum tagMatrixType
 	MATRIX_ONES
 } MatrixType;
 
+typedef enum tagRotateAxis
+{
+	ROTATE_X,
+	ROTATE_Y,
+	ROTATE_Z
+} RotateAxis;
+
 class GzMatrix
 {
 public:
 	/* Default constructor */
 	GzMatrix();
 	
-	// Initialize the matrix with a specific type
+	/* Initialize the matrix with a specific type */
 	GzMatrix(MatrixType type);
+
+	/* Initialize a rotation matrix */
+	GzMatrix(RotateAxis, float degree);
 
 	/* Initialize with four column vectors */
 	GzMatrix(GzVector *vectors);
@@ -50,6 +60,13 @@ public:
 
 	/* Matrix multiplication */
 	friend GzMatrix operator * (const GzMatrix& lhs, const GzMatrix& rhs);
+
+	/* Matrix multiplies a scalar on the right */
+	friend GzMatrix operator * (const GzMatrix& lhs, const float rhs);
+	GzMatrix operator *= (const float rhs);
+
+	/* Matrix multiplies a scalar on the left */
+	friend GzMatrix operator * (const float lhs, const GzMatrix& rhs);
 private:
 	float elements_[4][4];
 };

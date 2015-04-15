@@ -3,10 +3,15 @@
 #include "GzPixel.h"
 #include "GzSize.h"
 
+typedef enum tagDisplayClass
+{
+	RGB_DISPLAY
+} DisplayClass;
+
 class GzDisplay
 {
 public:
-	GzDisplay(GzDisplayClass dispClass, int xRes, int yRes);
+	GzDisplay(DisplayClass dispClass, int xRes, int yRes);
 	~GzDisplay();
 private:
 	unsigned short m_xRes;

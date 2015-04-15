@@ -101,6 +101,7 @@
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Application.h" />
     <ClInclude Include="GzCamera.h" />
     <ClInclude Include="GzColor.h" />
     <ClInclude Include="GzDisplay.h" />
@@ -127,6 +128,7 @@
     <ClInclude Include="VividView.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Application.cpp" />
     <ClCompile Include="GzCamera.cpp" />
     <ClCompile Include="GzColor.cpp" />
     <ClCompile Include="GzDisplay.cpp" />
